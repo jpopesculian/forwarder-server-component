@@ -1,0 +1,10 @@
+{
+  "host": "localhost",
+  "adapter": "postgresql",
+  "encoding": "utf-8",
+  "database": "forwarder",
+  "hostaddr": "127.0.0.1",
+  "port": 5432,
+  "user": "julian",
+  "password": "Kitty.2"
+}

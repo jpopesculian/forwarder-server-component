@@ -1,15 +1,14 @@
 module ServerComponent
   module Messages
-    module Events
-      class SmsReceived
+    module Commands
+      class SmsSend
         include Messaging::Message
 
         attribute :sms_id, String
-        attribute :message_sid, String
         attribute :time, String
-        attribute :from, String
         attribute :to, String
         attribute :body, String
+        attribute :from, String
       end
     end
   end
