@@ -10,6 +10,8 @@ module ServerComponent
         attribute :from, String
         attribute :to, String
         attribute :body, String
+        attribute :direction, String
+        attribute :status, String
       end
     end
   end
