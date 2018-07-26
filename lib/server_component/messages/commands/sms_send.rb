@@ -9,6 +9,7 @@ module ServerComponent
         attribute :to, String
         attribute :body, String
         attribute :from, String
+        attribute :status_callback, String
       end
     end
   end

@@ -26,6 +26,7 @@ module ServerComponent
 
       handle RecordSmsSent do |record_sms_sent|
         sms_sent = SmsSent.follow(record_sms_sent)
+        binding.pry
         stream_name = stream_name(sms_sent.sms_id)
         write.(sms_sent, stream_name)
       end

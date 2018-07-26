@@ -42,6 +42,7 @@ module ServerComponent
           from: sms_send.from,
           time: sms_send.time,
           body: sms_send.body,
+          status_callback: sms_send.status_callback,
           reply_stream_name: reply_stream_name,
           previous_message: sms_send
         )
