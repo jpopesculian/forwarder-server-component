@@ -4,6 +4,7 @@ module ServerComponent
       class SmsSend
         include Messaging::Message
 
+        attribute :request_id, String
         attribute :sms_id, String
         attribute :time, String
         attribute :to, String

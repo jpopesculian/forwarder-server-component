@@ -20,21 +20,19 @@ module ServerComponent
       category :server
 
       handle SmsReceive do |sms_receive|
-        message_sid = sms_receive.message_sid
-        time = clock.iso8601
-        reply_stream_name = command_stream_name(message_sid)
+        reply_stream_name = command_stream_name(sms_receive.request_id)
 
         sms_forward.(
-          message_sid: message_sid,
-          time: time,
+          sms_id: sms_receive.sms_id,
+          message_sid: sms_receive.message_sid,
+          time: sms_receive.time,
           reply_stream_name: reply_stream_name,
           previous_message: sms_receive
         )
       end
 
       handle SmsSend do |sms_send|
-        sms_id = sms_send.sms_id
-        reply_stream_name = command_stream_name(sms_id)
+        reply_stream_name = command_stream_name(sms_send.request_id)
 
         sms_deliver.(
           sms_id: sms_send.sms_id,
