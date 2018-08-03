@@ -11,12 +11,12 @@ module ServerComponent
         end
       end
 
-      def configure
-        @schema = ForwarderSchema::Schema
+      def call(data, options = {})
+        trigger(subscription_name, data, options)
       end
 
-      def call(model, options = {})
-        trigger(self.class.get_subscription_name, model, options = {})
+      def subscription_name
+        self.class.get_subscription_name
       end
 
       module SubscriptionName
@@ -48,7 +48,7 @@ module ServerComponent
       module Build
         def build
           instance = new
-          instance.configure
+          # instance.configure
           instance
         end
       end
@@ -66,7 +66,7 @@ module ServerComponent
       attr_reader :schema
 
       def subscriptions
-        schema.subscriptions
+        ForwarderSchema::Schema.subscriptions
       end
 
       def subscriptions?
