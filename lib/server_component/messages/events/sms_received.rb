@@ -13,6 +13,8 @@ module ServerComponent
         attribute :body, String
         attribute :direction, String
         attribute :status, String
+        attribute :processed_time, String
+        attribute :meta_position, String
       end
     end
   end

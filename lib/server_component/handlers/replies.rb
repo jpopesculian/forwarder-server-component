@@ -10,10 +10,12 @@ module ServerComponent
 
       dependency :write, Messaging::Postgres::Write
       dependency :clock, Clock::UTC
+      dependency :processed, Utils::Processed
 
       def configure
         Messaging::Postgres::Write.configure(self)
         Clock::UTC.configure(self)
+        Utils::Processed.configure(self)
       end
 
       category :server
@@ -21,6 +23,9 @@ module ServerComponent
       handle RecordSmsReceived do |record_sms_received|
         source_message_stream_name = record_sms_received.metadata.source_message_stream_name
         request_id = Messaging::StreamName.get_id(source_message_stream_name)
+
+        current, ignored = processed.(record_sms_received, id: request_id)
+        return ignored.() if current
 
         sms_received = SmsReceived.follow(record_sms_received)
         sms_received.request_id = request_id
@@ -32,6 +37,9 @@ module ServerComponent
       handle RecordSmsSent do |record_sms_sent|
         source_message_stream_name = record_sms_sent.metadata.source_message_stream_name
         request_id = Messaging::StreamName.get_id(source_message_stream_name)
+
+        current, ignored = processed.(record_sms_received, id: request_id)
+        return ignored.() if current
 
         sms_sent = SmsSent.follow(record_sms_sent)
         sms_sent.request_id = request_id

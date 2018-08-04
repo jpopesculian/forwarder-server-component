@@ -1,6 +1,8 @@
 require 'server_component/messages/commands/sms_receive'
 require 'server_component/messages/commands/sms_send'
 
+require 'server_component/messages/events/request_initiated'
+require 'server_component/messages/events/request_finished'
 require 'server_component/messages/events/sms_received'
 require 'server_component/messages/events/sms_sent'
 

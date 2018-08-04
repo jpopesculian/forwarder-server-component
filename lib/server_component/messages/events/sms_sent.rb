@@ -12,6 +12,8 @@ module ServerComponent
         attribute :to, String
         attribute :body, String
         attribute :status_callback, String
+        attribute :processed_time, String
+        attribute :meta_position, String
       end
     end
   end
